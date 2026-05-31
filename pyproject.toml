@@ -1,0 +1,62 @@
+# ---- written with claude
+
+[build-system]
+requires = [
+    "scikit-build-core>=0.9",
+    "pybind11>=2.12",
+]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "pydafruit_gfx"
+version = "0.1.0"
+description = "Adafruit_GFX desktop simulator — SDL2 backend exposed via pybind11"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+dependencies = []          # SDL2 is a system lib; no pure-Python runtime deps
+
+[project.urls]
+Repository = "https://github.com/yourusername/pydafruit_gfx"
+
+# ---------------------------------------------------------------------------
+# scikit-build-core configuration
+# ---------------------------------------------------------------------------
+[tool.scikit-build]
+# The wheel tag is determined per-platform by cibuildwheel.
+cmake.build-type = "Release"
+
+# Make the Adafruit library available as a git submodule path hint.
+# Users can also override: pip install . -Ccmake.args="-DADAFRUIT_GFX_DIR=/path"
+cmake.args = []
+
+# Package the compiled .so inside a `pydafruit_gfx/` namespace.
+wheel.packages = ["pydafruit_gfx"]
+
+# ---------------------------------------------------------------------------
+# cibuildwheel — controls the GitHub Actions matrix
+# ---------------------------------------------------------------------------
+[tool.cibuildwheel]
+# Build for CPython 3.9–3.12 only (PyPy skipped; SDL2 window not useful headless)
+build = "cp39-* cp310-* cp311-* cp312-*"
+skip  = "*-musllinux*"   # musl SDL2 packaging is painful; skip for now
+
+# Install SDL2 before building on each platform.
+# These run inside the cibuildwheel build container / CI runner.
+[tool.cibuildwheel.linux]
+before-all = "yum install -y SDL2-devel || apt-get install -y libsdl2-dev"
+# manylinux2014 image uses yum; manylinux_2_28 uses dnf/apt.
+# cibuildwheel auto-selects manylinux2014 for x86_64.
+manylinux-x86_64-image  = "quay.io/pypa/manylinux2014_x86_64"
+manylinux-aarch64-image = "quay.io/pypa/manylinux2014_aarch64"
+
+[tool.cibuildwheel.macos]
+before-all = "brew install sdl2"
+# Build universal2 (arm64 + x86_64) on the macOS runner.
+archs = ["arm64", "x86_64"]
+
+[tool.cibuildwheel.windows]
+# vcpkg is pre-installed on GitHub's windows-latest runner.
+before-all = "vcpkg install sdl2:x64-windows && vcpkg integrate install"
+# Point CMake at the vcpkg toolchain so find_package(SDL2) works.
+environment = { CMAKE_TOOLCHAIN_FILE = "C:/vcpkg/scripts/buildsystems/vcpkg.cmake" }

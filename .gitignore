@@ -1,0 +1,38 @@
+# Build artifacts
+build/
+dist/
+wheelhouse/
+*.egg-info/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Don't include local pybind11 directory
+pybind11/
+
+
+_build/
+*.whl
+*.egg-info/
+__pycache__/
+*.pyc
+.DS_Store
+EOF
