@@ -1,0 +1,2 @@
+rm -rf _build                                           
+pip install -e . --no-build-isolation -Cbuild-dir=_build
