@@ -40,7 +40,7 @@ Pre-built wheels for macOS, Linux, and Windows
 pip install pydafruit_gfx-*.whl
 ```
 
-## How I tested on my Mac
+## How I tested on my Mac (windows and linux should be similar)
 
 1. ```uname -m``` gave `arm64`
 2. ```python3 --version``` gave `Python 3.11.5`

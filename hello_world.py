@@ -24,7 +24,7 @@ disp.fill_screen(WHITE)
 # border
 disp.draw_rect(1, 1, WIDTH - 2, HEIGHT - 2, BLACK)
 
-# custom font, added to pydafruit_gfx.cpp and Adafruit-GFX-Library/Fonts
+# custom font, added to pydafruit_gfx.cpp and Fonts
 disp.set_font("GeorgiaI12")
 disp.set_text_color(BLACK)
 # get text bounds adafruit style
