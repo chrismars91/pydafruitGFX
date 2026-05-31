@@ -31,7 +31,7 @@
 #include <Fonts/TomThumb.h>
 
 // custom font
-#include <Fonts/GeorgiaItal12pt7b.h>
+#include "Fonts/GeorgiaItal12pt7b.h"
 
 
 namespace py = pybind11;
