@@ -28,7 +28,7 @@ pydafruit_gfx/
 ### Option 1 — download, pip install
 
 Pre-built wheels for macOS, Linux, and Windows
-[Actions tab](https://github.com/chrismars91/PydafruitGFX/actions).
+[Actions tab](https://github.com/chrismars91/pydafruitGFX/actions/runs/26725389812).
 
 1. Click the latest successful **Build wheels** run.
 2. Scroll to **Artifacts** at the bottom and download the zip for your platform:
